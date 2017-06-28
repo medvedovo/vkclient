@@ -8,15 +8,47 @@ public class Likes {
 
     @SerializedName("count")
     @Expose
-    public Integer count;
+    private Integer count;
     @SerializedName("user_likes")
     @Expose
-    public Integer userLikes;
+    private Integer userLikes;
     @SerializedName("can_like")
     @Expose
-    public Integer canLike;
+    private Integer canLike;
     @SerializedName("can_publish")
     @Expose
-    public Integer canPublish;
+    private Integer canPublish;
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public Integer getUserLikes() {
+        return userLikes;
+    }
+
+    public void setUserLikes(Integer userLikes) {
+        this.userLikes = userLikes;
+    }
+
+    public Integer getCanLike() {
+        return canLike;
+    }
+
+    public void setCanLike(Integer canLike) {
+        this.canLike = canLike;
+    }
+
+    public Integer getCanPublish() {
+        return canPublish;
+    }
+
+    public void setCanPublish(Integer canPublish) {
+        this.canPublish = canPublish;
+    }
 
 }

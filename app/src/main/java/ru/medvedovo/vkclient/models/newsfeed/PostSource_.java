@@ -4,14 +4,14 @@ package ru.medvedovo.vkclient.models.newsfeed;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Attachment {
+public class PostSource_ {
 
     @SerializedName("type")
     @Expose
     private String type;
-    @SerializedName("photo")
+    @SerializedName("platform")
     @Expose
-    private Photo photo;
+    private String platform;
 
     public String getType() {
         return type;
@@ -21,12 +21,12 @@ public class Attachment {
         this.type = type;
     }
 
-    public Photo getPhoto() {
-        return photo;
+    public String getPlatform() {
+        return platform;
     }
 
-    public void setPhoto(Photo photo) {
-        this.photo = photo;
+    public void setPlatform(String platform) {
+        this.platform = platform;
     }
 
 }

@@ -8,9 +8,25 @@ public class Reposts {
 
     @SerializedName("count")
     @Expose
-    public Integer count;
+    private Integer count;
     @SerializedName("user_reposted")
     @Expose
-    public Integer userReposted;
+    private Integer userReposted;
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public Integer getUserReposted() {
+        return userReposted;
+    }
+
+    public void setUserReposted(Integer userReposted) {
+        this.userReposted = userReposted;
+    }
 
 }

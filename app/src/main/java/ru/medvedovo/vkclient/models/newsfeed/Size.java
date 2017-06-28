@@ -4,7 +4,7 @@ package ru.medvedovo.vkclient.models.newsfeed;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Video {
+public class Size {
 
     @SerializedName("src")
     @Expose
@@ -15,9 +15,9 @@ public class Video {
     @SerializedName("height")
     @Expose
     private Integer height;
-    @SerializedName("file_size")
+    @SerializedName("type")
     @Expose
-    private Integer fileSize;
+    private String type;
 
     public String getSrc() {
         return src;
@@ -43,12 +43,12 @@ public class Video {
         this.height = height;
     }
 
-    public Integer getFileSize() {
-        return fileSize;
+    public String getType() {
+        return type;
     }
 
-    public void setFileSize(Integer fileSize) {
-        this.fileSize = fileSize;
+    public void setType(String type) {
+        this.type = type;
     }
 
 }

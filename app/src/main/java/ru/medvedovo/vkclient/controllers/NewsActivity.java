@@ -22,9 +22,7 @@ public class NewsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_news);
         VKParameters parameters = new VKParameters();
         parameters.put(VKApiConst.USER_ID, VKAccessToken.currentToken().userId);
-        //parameters.put(VKApiConst.VERSION, "5.65");
         parameters.put(VKApiConst.COUNT, 10);
-        //parameters.put(VKApiConst.ACCESS_TOKEN, VKAccessToken.currentToken().accessToken);
         VKRequest request = new VKRequest("newsfeed.get", parameters);
         request.executeWithListener(new VKRequest.VKRequestListener() {
             @Override

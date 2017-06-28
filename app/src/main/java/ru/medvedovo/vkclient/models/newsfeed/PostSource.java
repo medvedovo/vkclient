@@ -8,9 +8,14 @@ public class PostSource {
 
     @SerializedName("type")
     @Expose
-    public String type;
-    @SerializedName("platform")
-    @Expose
-    public String platform;
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
 }

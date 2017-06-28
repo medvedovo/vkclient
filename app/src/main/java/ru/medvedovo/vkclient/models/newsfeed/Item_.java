@@ -4,7 +4,7 @@ package ru.medvedovo.vkclient.models.newsfeed;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Photo {
+public class Item_ {
 
     @SerializedName("id")
     @Expose
@@ -15,6 +15,9 @@ public class Photo {
     @SerializedName("owner_id")
     @Expose
     private Integer ownerId;
+    @SerializedName("user_id")
+    @Expose
+    private Integer userId;
     @SerializedName("photo_75")
     @Expose
     private String photo75;
@@ -27,12 +30,6 @@ public class Photo {
     @SerializedName("photo_807")
     @Expose
     private String photo807;
-    @SerializedName("photo_1280")
-    @Expose
-    private String photo1280;
-    @SerializedName("photo_2560")
-    @Expose
-    private String photo2560;
     @SerializedName("width")
     @Expose
     private Integer width;
@@ -48,6 +45,36 @@ public class Photo {
     @SerializedName("access_key")
     @Expose
     private String accessKey;
+    @SerializedName("likes")
+    @Expose
+    private Likes_ likes;
+    @SerializedName("reposts")
+    @Expose
+    private Reposts_ reposts;
+    @SerializedName("comments")
+    @Expose
+    private Comments_ comments;
+    @SerializedName("can_comment")
+    @Expose
+    private Integer canComment;
+    @SerializedName("can_repost")
+    @Expose
+    private Integer canRepost;
+    @SerializedName("post_id")
+    @Expose
+    private Integer postId;
+    @SerializedName("photo_1280")
+    @Expose
+    private String photo1280;
+    @SerializedName("photo_2560")
+    @Expose
+    private String photo2560;
+    @SerializedName("lat")
+    @Expose
+    private Double lat;
+    @SerializedName("long")
+    @Expose
+    private Double _long;
 
     public Integer getId() {
         return id;
@@ -71,6 +98,14 @@ public class Photo {
 
     public void setOwnerId(Integer ownerId) {
         this.ownerId = ownerId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getPhoto75() {
@@ -103,22 +138,6 @@ public class Photo {
 
     public void setPhoto807(String photo807) {
         this.photo807 = photo807;
-    }
-
-    public String getPhoto1280() {
-        return photo1280;
-    }
-
-    public void setPhoto1280(String photo1280) {
-        this.photo1280 = photo1280;
-    }
-
-    public String getPhoto2560() {
-        return photo2560;
-    }
-
-    public void setPhoto2560(String photo2560) {
-        this.photo2560 = photo2560;
     }
 
     public Integer getWidth() {
@@ -159,6 +178,86 @@ public class Photo {
 
     public void setAccessKey(String accessKey) {
         this.accessKey = accessKey;
+    }
+
+    public Likes_ getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Likes_ likes) {
+        this.likes = likes;
+    }
+
+    public Reposts_ getReposts() {
+        return reposts;
+    }
+
+    public void setReposts(Reposts_ reposts) {
+        this.reposts = reposts;
+    }
+
+    public Comments_ getComments() {
+        return comments;
+    }
+
+    public void setComments(Comments_ comments) {
+        this.comments = comments;
+    }
+
+    public Integer getCanComment() {
+        return canComment;
+    }
+
+    public void setCanComment(Integer canComment) {
+        this.canComment = canComment;
+    }
+
+    public Integer getCanRepost() {
+        return canRepost;
+    }
+
+    public void setCanRepost(Integer canRepost) {
+        this.canRepost = canRepost;
+    }
+
+    public Integer getPostId() {
+        return postId;
+    }
+
+    public void setPostId(Integer postId) {
+        this.postId = postId;
+    }
+
+    public String getPhoto1280() {
+        return photo1280;
+    }
+
+    public void setPhoto1280(String photo1280) {
+        this.photo1280 = photo1280;
+    }
+
+    public String getPhoto2560() {
+        return photo2560;
+    }
+
+    public void setPhoto2560(String photo2560) {
+        this.photo2560 = photo2560;
+    }
+
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLong() {
+        return _long;
+    }
+
+    public void setLong(Double _long) {
+        this._long = _long;
     }
 
 }

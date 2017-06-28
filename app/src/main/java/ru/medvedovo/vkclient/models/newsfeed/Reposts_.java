@@ -4,14 +4,14 @@ package ru.medvedovo.vkclient.models.newsfeed;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Comments {
+public class Reposts_ {
 
     @SerializedName("count")
     @Expose
     private Integer count;
-    @SerializedName("can_post")
+    @SerializedName("user_reposted")
     @Expose
-    private Integer canPost;
+    private Integer userReposted;
 
     public Integer getCount() {
         return count;
@@ -21,12 +21,12 @@ public class Comments {
         this.count = count;
     }
 
-    public Integer getCanPost() {
-        return canPost;
+    public Integer getUserReposted() {
+        return userReposted;
     }
 
-    public void setCanPost(Integer canPost) {
-        this.canPost = canPost;
+    public void setUserReposted(Integer userReposted) {
+        this.userReposted = userReposted;
     }
 
 }

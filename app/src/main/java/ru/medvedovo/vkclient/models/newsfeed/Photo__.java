@@ -4,7 +4,7 @@ package ru.medvedovo.vkclient.models.newsfeed;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Photo {
+public class Photo__ {
 
     @SerializedName("id")
     @Expose
@@ -24,15 +24,6 @@ public class Photo {
     @SerializedName("photo_604")
     @Expose
     private String photo604;
-    @SerializedName("photo_807")
-    @Expose
-    private String photo807;
-    @SerializedName("photo_1280")
-    @Expose
-    private String photo1280;
-    @SerializedName("photo_2560")
-    @Expose
-    private String photo2560;
     @SerializedName("width")
     @Expose
     private Integer width;
@@ -45,9 +36,6 @@ public class Photo {
     @SerializedName("date")
     @Expose
     private Integer date;
-    @SerializedName("access_key")
-    @Expose
-    private String accessKey;
 
     public Integer getId() {
         return id;
@@ -97,30 +85,6 @@ public class Photo {
         this.photo604 = photo604;
     }
 
-    public String getPhoto807() {
-        return photo807;
-    }
-
-    public void setPhoto807(String photo807) {
-        this.photo807 = photo807;
-    }
-
-    public String getPhoto1280() {
-        return photo1280;
-    }
-
-    public void setPhoto1280(String photo1280) {
-        this.photo1280 = photo1280;
-    }
-
-    public String getPhoto2560() {
-        return photo2560;
-    }
-
-    public void setPhoto2560(String photo2560) {
-        this.photo2560 = photo2560;
-    }
-
     public Integer getWidth() {
         return width;
     }
@@ -151,14 +115,6 @@ public class Photo {
 
     public void setDate(Integer date) {
         this.date = date;
-    }
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
     }
 
 }
