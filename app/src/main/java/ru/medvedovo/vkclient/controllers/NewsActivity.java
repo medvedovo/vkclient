@@ -17,15 +17,22 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.medvedovo.vkclient.R;
 import ru.medvedovo.vkclient.adapters.NewsfeedAdapter;
+import ru.medvedovo.vkclient.models.GroupsModel;
+import ru.medvedovo.vkclient.models.NewsfeedModel;
+import ru.medvedovo.vkclient.models.UsersModel;
+import ru.medvedovo.vkclient.models.groups.Groups;
 import ru.medvedovo.vkclient.models.newsfeed.Newsfeed;
+import ru.medvedovo.vkclient.models.users.Users;
 
 public class NewsActivity extends AppCompatActivity {
 
     @BindView(R.id.newsfeed_view)
     RecyclerView newsfeedView;
 
-    private LinearLayoutManager linearLayoutManager;
     private NewsfeedAdapter adapter;
+    private GroupsModel groupsModel;
+    private NewsfeedModel newsfeedModel;
+    private UsersModel usersModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,33 +40,53 @@ public class NewsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_news);
         ButterKnife.bind(this);
 
-        linearLayoutManager = new LinearLayoutManager(NewsActivity.this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(NewsActivity.this);
         newsfeedView.setLayoutManager(linearLayoutManager);
-
         adapter = new NewsfeedAdapter(this);
 
-        getNewsfeed();
+        newsfeedModel = new NewsfeedModel();
+        groupsModel = new GroupsModel();
+        usersModel = new UsersModel();
+
+        newsfeedModel.getNewsfeed(getNewsfeedListener(), VKAccessToken.currentToken().userId, 10);
     }
 
-    private void getNewsfeed() {
-        VKParameters parameters = new VKParameters();
-        parameters.put(VKApiConst.USER_ID, VKAccessToken.currentToken().userId);
-        parameters.put(VKApiConst.COUNT, 10);
-        VKRequest request = new VKRequest("newsfeed.get", parameters);
-        request.executeWithListener(new VKRequest.VKRequestListener() {
+    private VKRequest.VKRequestListener getNewsfeedListener() {
+        return new VKRequest.VKRequestListener() {
             @Override
             public void onComplete(VKResponse response) {
                 super.onComplete(response);
                 Newsfeed newsfeed = new Gson().fromJson(response.responseString, Newsfeed.class);
 
                 adapter.addItems(newsfeed.getResponse().getItems());
+                groupsModel.getGroups(getGroupsListener(), adapter.getSourceIds(true));
+            }
+        };
+    }
+
+    private VKRequest.VKRequestListener getGroupsListener() {
+        return new VKRequest.VKRequestListener() {
+            @Override
+            public void onComplete(VKResponse response) {
+                super.onComplete(response);
+                Groups groups = new Gson().fromJson(response.responseString, Groups.class);
+
+                adapter.addGroups(groups.getResponse());
+                usersModel.getUsers(getUsersListener(), adapter.getSourceIds(false), "photo_100");
+            }
+        };
+    }
+
+    private VKRequest.VKRequestListener getUsersListener() {
+        return new VKRequest.VKRequestListener() {
+            @Override
+            public void onComplete(VKResponse response) {
+                super.onComplete(response);
+                Users users = new Gson().fromJson(response.responseString, Users.class);
+
+                adapter.addUsers(users.getResponse());
                 newsfeedView.setAdapter(adapter);
             }
-
-            @Override
-            public void onError(VKError error) {
-                super.onError(error);
-            }
-        });
+        };
     }
 }
