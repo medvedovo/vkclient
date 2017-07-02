@@ -42,6 +42,7 @@ public class NewsfeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
+            // Было бы правильнее сделать отдельные холдеры и вёрстку на каждый тип поста
             case ITEM_POST:
                 LayoutInflater inflater = LayoutInflater.from(parent.getContext());
                 View viewOrder = inflater.inflate(R.layout.holder_newsfeed_post, parent, false);
@@ -82,6 +83,7 @@ public class NewsfeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
              }
          }
 
+        // То же самое
         switch (getItemType(position)) {
             case ITEM_POST:
                 NewsfeedPostHolder.bind((NewsfeedPostHolder)holder, activity, data.get(position), sourcePictureUrl, sourceName);
