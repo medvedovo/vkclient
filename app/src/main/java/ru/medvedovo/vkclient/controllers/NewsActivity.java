@@ -4,9 +4,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.vk.sdk.VKAccessToken;
+import com.vk.sdk.VKSdk;
 import com.vk.sdk.api.VKApiConst;
 import com.vk.sdk.api.VKError;
 import com.vk.sdk.api.VKParameters;
@@ -29,6 +33,12 @@ public class NewsActivity extends AppCompatActivity {
     @BindView(R.id.newsfeed_view)
     RecyclerView newsfeedView;
 
+    @BindView(R.id.loading_container)
+    LinearLayout loadingContainer;
+
+    @BindView(R.id.logout_button)
+    Button logoutButton;
+
     private NewsfeedAdapter adapter;
     private GroupsModel groupsModel;
     private NewsfeedModel newsfeedModel;
@@ -39,7 +49,9 @@ public class NewsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
         ButterKnife.bind(this);
+        setButtonListeners();
 
+        loadingContainer.setVisibility(View.VISIBLE);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(NewsActivity.this);
         newsfeedView.setLayoutManager(linearLayoutManager);
         adapter = new NewsfeedAdapter(this);
@@ -48,7 +60,17 @@ public class NewsActivity extends AppCompatActivity {
         groupsModel = new GroupsModel();
         usersModel = new UsersModel();
 
-        newsfeedModel.getNewsfeed(getNewsfeedListener(), VKAccessToken.currentToken().userId, 10);
+        newsfeedModel.getNewsfeed(getNewsfeedListener(), VKAccessToken.currentToken().userId, 50);
+    }
+
+    private void setButtonListeners() {
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                VKSdk.logout();
+                finish();
+            }
+        });
     }
 
     private VKRequest.VKRequestListener getNewsfeedListener() {
@@ -86,6 +108,7 @@ public class NewsActivity extends AppCompatActivity {
 
                 adapter.addUsers(users.getResponse());
                 newsfeedView.setAdapter(adapter);
+                loadingContainer.setVisibility(View.GONE);
             }
         };
     }

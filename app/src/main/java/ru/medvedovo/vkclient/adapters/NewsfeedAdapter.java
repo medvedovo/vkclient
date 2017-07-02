@@ -2,11 +2,17 @@ package ru.medvedovo.vkclient.adapters;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
+import ru.medvedovo.vkclient.R;
+import ru.medvedovo.vkclient.adapters.holders.NewsfeedPostHolder;
 import ru.medvedovo.vkclient.models.groups.Group;
 import ru.medvedovo.vkclient.models.newsfeed.Item;
 import ru.medvedovo.vkclient.models.users.User;
@@ -35,12 +41,64 @@ public class NewsfeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        switch (viewType) {
+            case ITEM_POST:
+                LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+                View viewOrder = inflater.inflate(R.layout.holder_newsfeed_post, parent, false);
+                return new NewsfeedPostHolder(viewOrder);
+            case ITEM_PHOTO:
+                break;
+            case ITEM_PHOTO_TAG:
+                break;
+            case ITEM_WALL_PHOTO:
+                break;
+            case ITEM_FRIEND:
+                break;
+            case ITEM_NOTE:
+                break;
+        }
+        //return null;
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View viewOrder = inflater.inflate(R.layout.holder_newsfeed_post, parent, false);
+        return new NewsfeedPostHolder(viewOrder);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        Item item = data.get(position);
+        String sourcePictureUrl = "";
+        String sourceName = "";
+         if (item.getSourceId() > 0) {
+             User user = getUserById(item.getSourceId());
+             if (user != null) {
+                 sourcePictureUrl = user.getPhoto100();
+                 sourceName = String.format(Locale.getDefault(), "%s %s", user.getFirstName(), user.getLastName());
+             }
+         } else if (item.getSourceId() < 0) {
+             Group group = getGroupById(item.getSourceId());
+             if (group != null) {
+                 sourcePictureUrl = group.getPhoto50();
+                 sourceName = group.getName();
+             }
+         }
 
+        switch (getItemType(position)) {
+            case ITEM_POST:
+                NewsfeedPostHolder.bind((NewsfeedPostHolder)holder, activity, data.get(position), sourcePictureUrl, sourceName);
+                break;
+            case ITEM_PHOTO:
+                break;
+            case ITEM_PHOTO_TAG:
+                break;
+            case ITEM_WALL_PHOTO:
+                break;
+            case ITEM_FRIEND:
+                break;
+            case ITEM_NOTE:
+                break;
+        }
+
+        NewsfeedPostHolder.bind((NewsfeedPostHolder)holder, activity, data.get(position), sourcePictureUrl, sourceName);
     }
 
     public void addItems(List<Item> items) {
@@ -53,7 +111,7 @@ public class NewsfeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private Group getGroupById(Integer id) {
         for (Group group : groups) {
-            if (group.getId() == -id) {
+            if (group.getId() == -id || Objects.equals(group.getId(), id)) {
                 return group;
             }
         }
@@ -66,7 +124,7 @@ public class NewsfeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private User getUserById(Integer id) {
         for (User user : users) {
-            if (user.getId() == id) {
+            if (Objects.equals(user.getId(), id)) {
                 return user;
             }
         }

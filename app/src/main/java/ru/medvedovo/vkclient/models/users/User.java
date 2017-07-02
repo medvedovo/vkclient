@@ -18,6 +18,9 @@ public class User {
     @SerializedName("photo_50")
     @Expose
     private String photo50;
+    @SerializedName("photo_100")
+    @Expose
+    private String photo100;
 
     public Integer getId() {
         return id;
@@ -51,4 +54,11 @@ public class User {
         this.photo50 = photo50;
     }
 
+    public String getPhoto100() {
+        return photo100;
+    }
+
+    public void setPhoto100(String photo100) {
+        this.photo100 = photo100;
+    }
 }

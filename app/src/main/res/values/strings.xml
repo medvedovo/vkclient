@@ -3,4 +3,5 @@
     <integer name="com_vk_sdk_AppId">6074433</integer>
     <string name="authorization_error">Ошибка при авторизации</string>
     <string name="login_button">Login with VK</string>
+    <string name="logout_button">Logout</string>
 </resources>
