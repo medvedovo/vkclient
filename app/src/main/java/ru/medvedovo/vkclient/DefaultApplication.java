@@ -7,6 +7,8 @@ import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKAccessTokenTracker;
 import com.vk.sdk.VKSdk;
 
+import ru.medvedovo.vkclient.controllers.LoginActivity;
+
 public class DefaultApplication extends Application {
 
     VKAccessTokenTracker vkAccessTokenTracker = new VKAccessTokenTracker() {

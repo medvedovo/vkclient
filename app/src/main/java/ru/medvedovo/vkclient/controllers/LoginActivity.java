@@ -1,4 +1,4 @@
-package ru.medvedovo.vkclient;
+package ru.medvedovo.vkclient.controllers;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -15,13 +15,14 @@ import com.vk.sdk.api.VKError;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.medvedovo.vkclient.R;
 
 public class LoginActivity extends AppCompatActivity {
 
     @BindView(R.id.login_button)
     Button loginButton;
 
-    String[] vkScope = new String[]{VKScope.WALL};
+    String[] vkScope = new String[]{VKScope.FRIENDS,VKScope.WALL};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
